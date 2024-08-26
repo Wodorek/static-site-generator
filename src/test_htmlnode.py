@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -27,3 +27,16 @@ class TestHTMLNode(unittest.TestCase):
 
         self.assertEqual(node.__repr__(
         ), "HTMLNode(p, Witam konsumenta, children: None, {'href': '_blank'})")
+
+
+class TestLeafNode(unittest.TestCase):
+
+    def test_empty_value(self):
+        node = LeafNode('p', None)
+
+        self.assertRaises(ValueError, node.to_html)
+
+    def test_empty_tag(self):
+        node = LeafNode(None, "text").to_html()
+
+        self.assertEqual(node, "text")
