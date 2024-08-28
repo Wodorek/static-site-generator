@@ -1,6 +1,8 @@
 import os
 import shutil
 
+from generate_page import generate_page, generate_page_recursive
+
 
 def clear_folder(dest):
     for filename in os.listdir(dest):
@@ -27,8 +29,6 @@ def copy_to_directory(curr_path, src, destination):
 
             path_to_dest = os.path.join(destination, item)
 
-            print(path_to_dest)
-
             if not os.path.exists(path_to_dest):
                 os.mkdir(path_to_dest)
 
@@ -43,6 +43,10 @@ def main():
 
     copy_to_directory(os.path.abspath(''), 'static',
                       os.path.join(os.path.abspath(''), 'public'))
+
+    generate_page_recursive('content', os.path.join(
+        os.path.abspath(''), 'template.html'), os.path.join(
+        os.path.abspath(''), 'public'))
 
 
 if __name__ == '__main__':
